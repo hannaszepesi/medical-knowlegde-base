@@ -5,7 +5,7 @@ import {Outlet} from "react-router-dom";
 
 function App() {
   return (
-    <Box>
+    <Box sx={{paddingTop: 5, display: "flex", justifyContent: "center", height: "100vh", alignItems: "center"}}>
         <Navbar />
         <Outlet />
     </Box>
