@@ -4,9 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Diseases from "./components/Diseases";
-import Symptoms from "./components/Symtoms";
-import RiskFactors from "./components/RiskFactors";
+import Diseases from "./routes/Diseases";
+import Symptoms from "./routes/Symtoms";
+import RiskFactors from "./routes/RiskFactors";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
