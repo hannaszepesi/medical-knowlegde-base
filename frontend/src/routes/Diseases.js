@@ -12,17 +12,27 @@ const headCells = [{
 
 const fetchDiseases = async () => {
     const response = await (fetch("/diseases/get-all"));
-    return await response.json();
+    if (response.status === 200) {
+        return await response.json();
+    }
 }
-
 
 export default function DiseaseTable() {
     const [diseases, setDiseases] = useState([])
 
     useEffect(() => {
+        // eslint-disable-next-line no-unused-vars
+        let cancelled = false;
         fetchDiseases().then((diseases) => {
             setDiseases(diseases)
         })
+
+        function cleanUp() {
+            cancelled = true;
+        }
+
+        return cleanUp;
+
     }, [])
 
     return (<CustomTable headCells={headCells} descriptionArrow={true} rows={diseases} name="disease"/>)
