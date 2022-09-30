@@ -14,14 +14,14 @@ const TableToolbar = (props) => {
                 fontSize="x-large"
                 sx={{flex: '1 1 100%',
                 fontWeight: "bold",
-                font: "monospace"}}
+                textTransform: "uppercase"}}
                 variant="h6"
                 id="tableTitle"
                 component="div"
             >
-                {name}
+                {name + "S"}
             </Typography>
-            <EditModal method="new"/>
+            <EditModal method="new" name={name}/>
         </Toolbar>
     );
 };
