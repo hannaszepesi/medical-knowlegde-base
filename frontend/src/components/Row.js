@@ -2,18 +2,27 @@ import * as React from "react";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import IconButton from "@mui/material/IconButton";
+import DeleteIcon from '@mui/icons-material/Delete';
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import {Collapse} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import EditModal from "./EditModal";
+import EditModal, {sendDataForServer} from "./EditModal";
 import Cells from "./Cells";
+
+export const handleDelete = async (tableName, id) => {
+    // eslint-disable-next-line no-restricted-globals
+    let result = confirm("Are you sure you want to delete this?");
+    if (result) {
+        await sendDataForServer(`/${tableName.replace(" ", "-") + "s"}/delete/${id}`, "", 'DELETE');
+        window.location.reload();
+    }
+}
 
 const Row = (props) => {
     const {row, descriptionArrow, name} = props;
     const [open, setOpen] = React.useState(false);
-
 
     return (<React.Fragment>
         <TableRow
@@ -33,7 +42,10 @@ const Row = (props) => {
         </TableCell> : ""}
             <Cells row={row} name={name}/>
             <TableCell>
-                <EditModal method="edit"/>
+                <EditModal method="edit" name={name} row={row}/>
+            </TableCell>
+            <TableCell>
+                <IconButton onClick={() => handleDelete(name, row.id)}><DeleteIcon/></IconButton>
             </TableCell>
 
         </TableRow>

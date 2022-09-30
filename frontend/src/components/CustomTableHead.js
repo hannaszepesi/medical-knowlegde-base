@@ -19,6 +19,7 @@ const CustomTableHead = (props) => {
                 {headCell.label}
             </TableCell>))}
             <TableCell></TableCell>
+            <TableCell></TableCell>
         </TableRow>
     </TableHead>);
 
