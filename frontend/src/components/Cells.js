@@ -10,9 +10,9 @@ const Cells = (props) => {
         >
             {row.name}
         </TableCell>
-            {name === "Diseases" ? <React.Fragment><TableCell align="right">{row.symptoms.join(", ")}</TableCell>
+            {name === "disease" ? <React.Fragment><TableCell align="right">{row.symptoms.map(symptom => symptom.name).join(", ")}</TableCell>
                     <TableCell
-                        align="right">{row.riskFactors.join(", ")}</TableCell></React.Fragment> :
+                        align="right">{row.riskFactors.map(risk => risk.name).join(", ")}</TableCell></React.Fragment> :
                 <TableCell align="right">{row.description}</TableCell>}
         </React.Fragment>
     )
