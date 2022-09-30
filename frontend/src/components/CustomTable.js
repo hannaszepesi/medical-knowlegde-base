@@ -16,7 +16,7 @@ const CustomTable = (props) => {
     const {headCells, descriptionArrow, rows, name} = props
 
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -27,14 +27,12 @@ const CustomTable = (props) => {
         setPage(0);
     };
 
-    const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-
-    return (<Box sx={{width: '100%', maxWidth: 800, padding: 10}}>
+    return (<Box sx={{width: '100%', maxWidth: 900, padding: 10}}>
         <Paper sx={{width: '100%', mb: 2}}>
             <TableToolbar name={name}/>
             <TableContainer>
                 <Table
-                    sx={{minWidth: 750}}
+                    sx={{minWidth: 750, minHeight: 500}}
                     aria-labelledby="tableTitle"
                 >
                     <CustomTableHead headCells={headCells} descriptionArrow={descriptionArrow}
@@ -45,9 +43,6 @@ const CustomTable = (props) => {
                             .map((row) => {
                                 return <Row key={row.name} row={row} descriptionArrow={descriptionArrow} name={name}/>
                             })}
-                        {emptyRows > 0 && (<TableRow>
-                            <TableCell colSpan={6}/>
-                        </TableRow>)}
                     </TableBody>
                 </Table>
             </TableContainer>
