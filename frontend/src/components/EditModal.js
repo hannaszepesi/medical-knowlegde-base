@@ -28,23 +28,19 @@ const style = {
 };
 
 const fetchNames = async (type) => {
-    const response = await (fetch(`/${type}/names`));
+    const response = await (fetch(`/${type}/get-all`));
     return await response.json();
 };
 
 export const sendDataForServer = async (url, payload, method) => {
     console.log(method)
     console.log(payload)
-    let response = await fetch(url, {
+    await fetch(url, {
         credentials: 'include',
         method: method,
         headers: {"Content-type": "application/json"},
         body: JSON.stringify(payload)
     });
-    console.log(response.status)
-    if (response.status === 200) {
-        console.log(response.json());
-    }
 };
 
 export default function EditModal(props) {
@@ -66,8 +62,6 @@ export default function EditModal(props) {
     const handleClose = () => setOpen(false);
 
     const submitNew = async (tableName, payload) => {
-        console.log(payload)
-        console.log(tableName)
         sendDataForServer(`/${tableName.replace(" ", "-") + "s"}/add`, payload, 'POST').then(() => console.log('ok'))
         window.location.reload();
 
@@ -75,8 +69,6 @@ export default function EditModal(props) {
 
 
     const submitEdit = async (tableName, payload, id) => {
-        console.log(payload)
-        console.log(tableName)
         sendDataForServer(`/${tableName.replace(" ", "-") + "s"}/update/${id}`, payload, 'PUT').then(() => console.log('ok'))
         window.location.reload();
 
@@ -92,6 +84,7 @@ export default function EditModal(props) {
     }
 
     useEffect(() => {
+        // eslint-disable-next-line no-unused-vars
         let cancelled = false;
         fetchNames("risk-factors").then((riskFactors) => {
             setRiskFactorsList(riskFactors)
@@ -106,6 +99,7 @@ export default function EditModal(props) {
     }, [])
 
     useEffect(() => {
+        // eslint-disable-next-line no-unused-vars
         let cancelled = false;
         fetchNames("symptoms").then((symptoms) => {
             setSymptomsList(symptoms)
@@ -118,6 +112,15 @@ export default function EditModal(props) {
         return cleanUp;
 
     }, [])
+
+    const getDataFromInput = (sampleObject, newValue) => {
+        let newArray = []
+        for (let i = 0; i < newValue.length; i++) {
+            newArray.push(sampleObject.find((r) => r.name === newValue[i]));
+        }
+        return newArray;
+
+    }
 
     const payloadGenerator = (tableName) => {
         if (tableName === "disease") {
@@ -156,10 +159,10 @@ export default function EditModal(props) {
                 <Autocomplete sx={{padding: 2, width: 300}}
                               multiple
                               id="tags-risk-factors"
-                              options={riskFactorsList}
+                              options={riskFactorsList.map((riskFactor) => riskFactor.name)}
                               filterSelectedOptions
                               onChange={(event, newValue) => {
-                                  setRiskFactors(newValue);
+                                  setRiskFactors(getDataFromInput(riskFactorsList, newValue));
                               }}
                               defaultValue={method === "edit" ? riskFactors.map((riskFactor) => riskFactor.name) : undefined}
                               renderInput={(params) => (
@@ -180,10 +183,10 @@ export default function EditModal(props) {
                 <Autocomplete sx={{padding: 2, width: 300}}
                               multiple
                               id="tags-symptoms"
-                              options={symptomsList}
+                              options={symptomsList.map((symptom) => symptom.name)}
                               filterSelectedOptions
                               onChange={(event, newValue) => {
-                                  setSymptoms(newValue);
+                                  setSymptoms(getDataFromInput(symptomsList, newValue));
                               }}
                               defaultValue={method === "edit" ? symptoms.map((symptom) => symptom.name) : undefined}
                               renderInput={(params) => (
