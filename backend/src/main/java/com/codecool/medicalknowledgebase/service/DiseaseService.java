@@ -1,11 +1,16 @@
 package com.codecool.medicalknowledgebase.service;
 
+import com.codecool.medicalknowledgebase.model.RiskFactor;
+import com.codecool.medicalknowledgebase.model.Symptom;
 import com.codecool.medicalknowledgebase.repository.DiseaseRepository;
 import com.codecool.medicalknowledgebase.model.Disease;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import javax.persistence.Tuple;
+import javax.swing.text.html.parser.Entity;
+import javax.xml.crypto.dsig.keyinfo.KeyValue;
+import java.util.*;
 
 @Component
 public class DiseaseService {
@@ -13,8 +18,8 @@ public class DiseaseService {
     @Autowired
     private DiseaseRepository diseaseRepository;
 
-    public void add(Disease disease) {
-        diseaseRepository.save(disease);
+    public Disease add(Disease disease) {
+        return diseaseRepository.save(disease);
     }
 
     public Disease find(Long id) {
@@ -30,9 +35,9 @@ public class DiseaseService {
     }
 
     public void update(Long id, Disease disease) {
-        diseaseRepository.update(id, disease.getName(), disease.getDescription(), disease.getSymptoms(), disease.getRiskFactors());
+        disease.setId(id);
+        diseaseRepository.save(disease);
     }
-
 
 
 

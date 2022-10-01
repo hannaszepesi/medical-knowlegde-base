@@ -1,10 +1,14 @@
 package com.codecool.medicalknowledgebase.service;
 
+import com.codecool.medicalknowledgebase.model.Disease;
 import com.codecool.medicalknowledgebase.repository.SymptomRepository;
 import com.codecool.medicalknowledgebase.model.Symptom;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.CascadeType;
+import javax.persistence.ManyToMany;
 import java.util.List;
 
 @Component
@@ -13,8 +17,8 @@ public class SymptomService {
     @Autowired
     private SymptomRepository symptomRepository;
 
-    public void add(Symptom symptom) {
-        symptomRepository.save(symptom);
+    public Symptom add(Symptom symptom) {
+        return symptomRepository.save(symptom);
     }
 
     public Symptom find(Long id) {

@@ -12,8 +12,8 @@ public class RiskFactorService {
     @Autowired
     private RiskFactorRepository riskFactorRepository;
 
-    public void add(RiskFactor riskFactor) {
-        riskFactorRepository.save(riskFactor);
+    public RiskFactor add(RiskFactor riskFactor) {
+        return riskFactorRepository.save(riskFactor);
     }
 
     public RiskFactor find(Long id) {
