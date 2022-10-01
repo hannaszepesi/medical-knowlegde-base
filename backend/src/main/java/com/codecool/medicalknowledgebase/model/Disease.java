@@ -8,6 +8,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 @Getter
 @Entity
 @Setter
@@ -24,9 +27,11 @@ public class Disease{
     private String description;
 
     @ManyToMany
+    @Cascade(CascadeType.DETACH)
     private List<Symptom> symptoms;
 
     @ManyToMany
+    @Cascade(CascadeType.DETACH)
     private List<RiskFactor> riskFactors;
 
     public Disease(String name) {
