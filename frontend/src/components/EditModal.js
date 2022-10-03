@@ -33,8 +33,6 @@ const fetchNames = async (type) => {
 };
 
 export const sendDataForServer = async (url, payload, method) => {
-    console.log(method)
-    console.log(payload)
     await fetch(url, {
         credentials: 'include',
         method: method,
