@@ -18,6 +18,8 @@ public interface SymptomRepository extends JpaRepository<Symptom, Long> {
 
     void deleteById(Long id);
 
+    List<Symptom> findAllByOrderByIdDesc();
+
     @Query("SELECT name FROM Symptom ")
     List<String> getNames();
     @Modifying

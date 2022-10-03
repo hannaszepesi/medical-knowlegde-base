@@ -1,7 +1,6 @@
 package com.codecool.medicalknowledgebase.repository;
 
 import com.codecool.medicalknowledgebase.model.RiskFactor;
-import com.codecool.medicalknowledgebase.model.Symptom;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -16,6 +15,8 @@ import java.util.Optional;
 public interface RiskFactorRepository extends JpaRepository<RiskFactor, Long> {
 
     Optional<RiskFactor> findById(Long id);
+
+    List<RiskFactor> findAllByOrderByIdDesc();
 
     void deleteById(Long id);
 
