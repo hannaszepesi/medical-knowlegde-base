@@ -1,5 +1,3 @@
-import TableRow from "@mui/material/TableRow";
-import TableCell from "@mui/material/TableCell";
 import * as React from "react";
 import Paper from "@mui/material/Paper";
 import TableToolbar from "./TableToolbar";

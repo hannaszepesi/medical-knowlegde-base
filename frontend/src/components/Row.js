@@ -8,17 +8,11 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import {Collapse} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import EditModal, {sendDataForServer} from "./EditModal";
+import EditModal from "./EditModal";
 import Cells from "./Cells";
+import {handleDelete} from "./Util";
 
-export const handleDelete = async (tableName, id) => {
-    // eslint-disable-next-line no-restricted-globals
-    let result = confirm("Are you sure you want to delete this?");
-    if (result) {
-        await sendDataForServer(`/${tableName.replace(" ", "-") + "s"}/delete/${id}`, "", 'DELETE');
-        window.location.reload();
-    }
-}
+
 
 const Row = (props) => {
     const {row, descriptionArrow, name} = props;

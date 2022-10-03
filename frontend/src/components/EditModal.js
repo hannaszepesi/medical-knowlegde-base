@@ -10,36 +10,15 @@ import AddIcon from "@mui/icons-material/AddCircleOutline";
 import Tooltip from "@mui/material/Tooltip";
 import {useEffect} from "react";
 import {Link} from "react-router-dom";
-import {handleDelete} from "./Row";
-
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 600,
-    bgcolor: 'background.paper',
-    border: '3px solid #1565c0',
-    boxShadow: 24,
-    borderRadius: 5,
-    p: 4,
-    display: "flex",
-    flexDirection: "column"
-};
+import {handleDelete} from "./Util";
+import {sendDataForServer} from "./Util";
+import {modalStyle} from "./Style";
 
 const fetchNames = async (type) => {
     const response = await (fetch(`/${type}/get-all`));
     return await response.json();
 };
 
-export const sendDataForServer = async (url, payload, method) => {
-    await fetch(url, {
-        credentials: 'include',
-        method: method,
-        headers: {"Content-type": "application/json"},
-        body: JSON.stringify(payload)
-    });
-};
 
 export default function EditModal(props) {
 
@@ -52,8 +31,8 @@ export default function EditModal(props) {
 
     const rowId = method === "edit" ? row.id : "";
     const [rowName, setRowName] = React.useState(method === "edit" ? row.name : "");
-    const [description, setDescription] = React.useState(method === "edit" ? row.description : "");
-    const [riskFactors, setRiskFactors] = React.useState(method === "edit" ? row.riskFactors : "");
+    const [description, setDescription] = React.useState(method === "edit" ? row.description : []);
+    const [riskFactors, setRiskFactors] = React.useState(method === "edit" ? row.riskFactors : []);
     const [symptoms, setSymptoms] = React.useState(method === "edit" ? row.symptoms : "");
 
     const handleOpen = () => setOpen(true);
@@ -162,7 +141,7 @@ export default function EditModal(props) {
                               onChange={(event, newValue) => {
                                   setRiskFactors(getDataFromInput(riskFactorsList, newValue));
                               }}
-                              defaultValue={method === "edit" ? riskFactors.map((riskFactor) => riskFactor.name) : undefined}
+                              defaultValue={method === "edit" ? riskFactors.map((riskFactor) => riskFactor.name) : []}
                               renderInput={(params) => (
                                   <TextField
                                       {...params}
@@ -186,7 +165,7 @@ export default function EditModal(props) {
                               onChange={(event, newValue) => {
                                   setSymptoms(getDataFromInput(symptomsList, newValue));
                               }}
-                              defaultValue={method === "edit" ? symptoms.map((symptom) => symptom.name) : undefined}
+                              defaultValue={method === "edit" ? symptoms.map((symptom) => symptom.name) : []}
                               renderInput={(params) => (
                                   <TextField
                                       {...params}
@@ -225,7 +204,7 @@ export default function EditModal(props) {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
+                <Box sx={modalStyle}>
                     <Box sx={{display: "flex", justifyContent: "space-between"}}>
                         <Typography padding={2} color="primary" id="modal-modal-title" variant="h4" component="h2">
                             {method === "edit" ? "Edit" : "Add new"} {name}
