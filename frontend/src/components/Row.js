@@ -36,6 +36,7 @@ const Row = (props) => {
                 size="small"
                 onClick={() => setOpen(!open)}
                 title="View description"
+                color="primary"
             >
                 {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
             </IconButton>
@@ -45,7 +46,7 @@ const Row = (props) => {
                 <EditModal method="edit" name={name} row={row}/>
             </TableCell>
             <TableCell>
-                <IconButton onClick={() => handleDelete(name, row.id)}><DeleteIcon/></IconButton>
+                <IconButton title={"Delete " + name} onClick={() => handleDelete(name, row.id)}><DeleteIcon/></IconButton>
             </TableCell>
 
         </TableRow>

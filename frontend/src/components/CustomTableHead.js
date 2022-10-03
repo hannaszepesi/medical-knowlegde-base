@@ -8,7 +8,7 @@ const CustomTableHead = (props) => {
     const {headCells, descriptionArrow} = props
 
     return (<TableHead>
-        <TableRow>
+        <TableRow sx={{borderBottom: "1px solid rgba(110,198,255,1)"}}>
             {descriptionArrow === true ? <TableCell
                 key={"description" + headCells.id}
             >

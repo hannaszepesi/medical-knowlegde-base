@@ -170,7 +170,7 @@ export default function EditModal(props) {
                                   />
                               )}
                 />
-                <IconButton component={Link} to={"/risk-factors"}><AddIcon color="primary"/></IconButton>
+                <IconButton title="Add new risk factor" component={Link} to={"/risk-factors"}><AddIcon color="primary"/></IconButton>
             </Box>
         )
     }
@@ -194,7 +194,7 @@ export default function EditModal(props) {
                                   />
                               )}
                 />
-                <IconButton component={Link} to={"/symptoms"}><AddIcon color="primary"/></IconButton>
+                <IconButton title="Add new symptom" component={Link} to={"/symptoms"}><AddIcon color="primary"/></IconButton>
             </Box>
         )
     }
@@ -216,7 +216,7 @@ export default function EditModal(props) {
 
     return (
         <React.Fragment>
-            {method === "edit" ? <IconButton onClick={handleOpen} color="primary"><EditIcon/></IconButton> :
+            {method === "edit" ? <IconButton title={"Edit " + name} onClick={handleOpen} color="primary"><EditIcon/></IconButton> :
                 <Tooltip title={"Add new " + name}><Button onClick={handleOpen} variant="contained"
                                                            endIcon={<AddIcon/>}>new</Button></Tooltip>}
             <Modal
