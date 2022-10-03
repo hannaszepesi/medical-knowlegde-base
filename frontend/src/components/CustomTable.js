@@ -28,11 +28,11 @@ const CustomTable = (props) => {
     };
 
     return (<Box sx={{width: '100%', maxWidth: 900, padding: 10}}>
-        <Paper sx={{width: '100%', mb: 2}}>
+        <Paper sx={{width: '100%', mb: 2, border: "2px solid rgba(0,105,192,1)"}}>
             <TableToolbar name={name}/>
-            <TableContainer>
+            <TableContainer sx={{height: 500}}>
                 <Table
-                    sx={{minWidth: 750, minHeight: 500}}
+                    stickyHeader
                     aria-labelledby="tableTitle"
                 >
                     <CustomTableHead headCells={headCells} descriptionArrow={descriptionArrow}
@@ -54,6 +54,7 @@ const CustomTable = (props) => {
                 page={page}
                 onRowsPerPageChange={handleChangeRowsPerPage}
                 onPageChange={handleChangePage}
+                sx={{borderTop: "1px solid rgba(110,198,255,1)"}}
             />
         </Paper>
     </Box>);

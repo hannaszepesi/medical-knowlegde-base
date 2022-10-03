@@ -8,7 +8,7 @@ const TableToolbar = (props) => {
     const {name} = props
 
     return (
-        <Toolbar>
+        <Toolbar sx={{borderBottom: "1px solid rgba(110,198,255,1)"}}>
             <Typography
                 color="primary"
                 fontSize="x-large"

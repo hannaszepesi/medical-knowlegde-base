@@ -51,7 +51,7 @@ const Row = (props) => {
         </TableRow>
         {descriptionArrow === true ? <TableRow>
             <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
-                <Collapse in={open} timeout="auto" unmountOnExit>
+                <Collapse in={open} timeout="auto">
                     <Box sx={{margin: 1}}>
                         <Typography variant="h6" gutterBottom component="div">
                             Description

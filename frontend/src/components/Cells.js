@@ -5,7 +5,7 @@ const Cells = (props) => {
     const {row, name} = props;
     const labelId = `${row.name}`;
 
-    return (<React.Fragment><TableCell
+    return (<React.Fragment><TableCell sx={{fontWeight: "bold"}}
             id={labelId}
         >
             {row.name}

@@ -13,7 +13,7 @@ const CustomTableHead = (props) => {
                 key={"description" + headCells.id}
             >
             </TableCell> : ""}
-            {headCells.map((headCell) => (<TableCell align="center" sx={{color: "primary", fontWeight: "bold"}}
+            {headCells.map((headCell) => (<TableCell align="center" sx={{color: "rgba(0,105,192,1)", fontWeight: "bold"}}
                                                      key={headCell.id}
             >
                 {headCell.label}
