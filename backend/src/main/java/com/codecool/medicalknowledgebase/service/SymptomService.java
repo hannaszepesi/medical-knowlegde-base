@@ -1,6 +1,7 @@
 package com.codecool.medicalknowledgebase.service;
 
 import com.codecool.medicalknowledgebase.model.Disease;
+import com.codecool.medicalknowledgebase.model.RiskFactor;
 import com.codecool.medicalknowledgebase.repository.SymptomRepository;
 import com.codecool.medicalknowledgebase.model.Symptom;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.CascadeType;
 import javax.persistence.ManyToMany;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class SymptomService {
@@ -26,10 +28,15 @@ public class SymptomService {
     }
 
     public List<Symptom> getAll() {
-        return symptomRepository.findAll();
+        return symptomRepository.findAllByOrderByIdDesc();
     }
 
     public void delete(Long id) {
+        Optional<Symptom> symptom = symptomRepository.findById(id);
+        symptom.ifPresent(symptom1 -> {
+            for (Disease disease : symptom1.getDiseases()) {
+                disease.getSymptoms().remove(symptom1);
+            }});
         symptomRepository.deleteById(id);
     }
 

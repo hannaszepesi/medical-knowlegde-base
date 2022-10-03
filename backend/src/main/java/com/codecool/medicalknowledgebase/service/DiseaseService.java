@@ -27,7 +27,7 @@ public class DiseaseService {
     }
 
     public List<Disease> getAll() {
-        return diseaseRepository.findAll();
+        return diseaseRepository.findAllByOrderByIdDesc();
     }
 
     public void delete(Long id) {

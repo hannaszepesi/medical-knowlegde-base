@@ -31,7 +31,6 @@ public class Disease{
     private List<Symptom> symptoms;
 
     @ManyToMany
-    @Cascade(CascadeType.DETACH)
     private List<RiskFactor> riskFactors;
 
     public Disease(String name) {

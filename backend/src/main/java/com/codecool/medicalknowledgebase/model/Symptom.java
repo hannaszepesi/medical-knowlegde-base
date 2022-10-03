@@ -28,7 +28,6 @@ public class Symptom {
 
     @JsonIgnore
     @ManyToMany
-    @Cascade(CascadeType.ALL)
     private List<Disease> diseases;
 
     public Symptom(String name) {

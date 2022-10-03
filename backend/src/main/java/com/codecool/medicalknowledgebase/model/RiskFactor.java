@@ -29,7 +29,6 @@ public class RiskFactor {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "riskFactors")
-    @Cascade(CascadeType.ALL)
     private List<Disease> diseases;
 
     public RiskFactor(String name) {
