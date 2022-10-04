@@ -1,6 +1,7 @@
 import * as React from "react";
 import CustomTable from "../components/CustomTable";
-import {useEffect, useState} from "react";
+import {useState} from "react";
+import {getData, SetInitialData} from "../components/Util";
 
 export default function Symptoms() {
 
@@ -10,18 +11,9 @@ export default function Symptoms() {
         id: 'description', label: 'Description',
     }];
 
-    const fetchSymptoms = async () => {
-        const response = await (fetch("/symptoms/get-all"));
-        return await response.json();
-    }
-
     const [symptoms, setSymptoms] = useState([])
 
-    useEffect(() => {
-        fetchSymptoms().then((symptoms) => {
-            setSymptoms(symptoms)
-        })
-    }, [])
+    SetInitialData(setSymptoms, () => getData("/symptoms/get-all"));
 
     return (<CustomTable headCells={headCells} descriptionArrow={false} rows={symptoms} name="symptom"/>)
 

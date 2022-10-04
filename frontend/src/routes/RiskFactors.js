@@ -1,6 +1,7 @@
 import * as React from "react";
 import CustomTable from "../components/CustomTable";
-import {useEffect, useState} from "react";
+import {useState} from "react";
+import {getData, SetInitialData} from "../components/Util";
 
 export default function RiskFactors() {
 
@@ -10,18 +11,9 @@ export default function RiskFactors() {
         id: 'description', label: 'Description',
     }];
 
-    const fetchRiskFactors = async () => {
-        const response = await (fetch("/risk-factors/get-all"));
-        return await response.json();
-    }
-
     const [riskFactors, setRiskFactors] = useState([])
 
-    useEffect(() => {
-        fetchRiskFactors().then((riskFactors) => {
-            setRiskFactors(riskFactors)
-        })
-    }, [])
+    SetInitialData(setRiskFactors, () => getData("/risk-factors/get-all"));
 
     return (<CustomTable headCells={headCells} descriptionArrow={false} rows={riskFactors} name="risk factor"/>)
 

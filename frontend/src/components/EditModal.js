@@ -8,16 +8,10 @@ import {Autocomplete, Button, TextField} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from "@mui/icons-material/AddCircleOutline";
 import Tooltip from "@mui/material/Tooltip";
-import {useEffect} from "react";
 import {Link} from "react-router-dom";
-import {handleDelete} from "./Util";
+import {getData, handleDelete, SetInitialData} from "./Util";
 import {sendDataForServer} from "./Util";
 import {modalStyle} from "./Style";
-
-const fetchNames = async (type) => {
-    const response = await (fetch(`/${type}/get-all`));
-    return await response.json();
-};
 
 
 export default function EditModal(props) {
@@ -60,35 +54,9 @@ export default function EditModal(props) {
         }
     }
 
-    useEffect(() => {
-        // eslint-disable-next-line no-unused-vars
-        let cancelled = false;
-        fetchNames("risk-factors").then((riskFactors) => {
-            setRiskFactorsList(riskFactors)
-        })
+    SetInitialData(setSymptomsList, () => getData("/symptoms/get-all"));
 
-        function cleanUp() {
-            cancelled = true;
-        }
-
-        return cleanUp;
-
-    }, [])
-
-    useEffect(() => {
-        // eslint-disable-next-line no-unused-vars
-        let cancelled = false;
-        fetchNames("symptoms").then((symptoms) => {
-            setSymptomsList(symptoms)
-        })
-
-        function cleanUp() {
-            cancelled = true;
-        }
-
-        return cleanUp;
-
-    }, [])
+    SetInitialData(setRiskFactorsList, () => getData("/risk-factors/get-all"));
 
     const getDataFromInput = (sampleObject, newValue) => {
         let newArray = []
