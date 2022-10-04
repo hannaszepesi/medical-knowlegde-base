@@ -27,7 +27,7 @@ public class Symptom {
     private String description;
 
     @JsonIgnore
-    @ManyToMany
+    @ManyToMany(mappedBy = "symptoms")
     private List<Disease> diseases;
 
     public Symptom(String name) {

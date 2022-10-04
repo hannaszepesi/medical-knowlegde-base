@@ -27,7 +27,6 @@ public class Disease{
     private String description;
 
     @ManyToMany
-    @Cascade(CascadeType.DETACH)
     private List<Symptom> symptoms;
 
     @ManyToMany
