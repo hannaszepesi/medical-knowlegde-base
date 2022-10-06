@@ -1,26 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Diseases from "./routes/Diseases";
 import Symptoms from "./routes/Symtoms";
 import RiskFactors from "./routes/RiskFactors";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-      <BrowserRouter>
-          <Routes>
-              <Route path="/" element={<App />}>
-                  <Route path="" element={<Diseases />}/>
-                  <Route path="/diseases" element={<Diseases />}/>
-                  <Route path="/symptoms" element={<Symptoms />}/>
-                  <Route path="/risk-factors" element={<RiskFactors />}/>
-              </Route>
-          </Routes>
-      </BrowserRouter>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route path="" element={<Diseases />} />
+          <Route path="/diseases" element={<Diseases />} />
+          <Route path="/symptoms" element={<Symptoms />} />
+          <Route path="/risk-factors" element={<RiskFactors />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
