@@ -1,6 +1,6 @@
 import * as React from "react";
 import CustomTable from "../components/CustomTable";
-import { useState } from "react";
+import {useCallback, useState} from "react";
 import { getData, useInitialData } from "../components/Util";
 
 export default function Symptoms() {
@@ -17,7 +17,9 @@ export default function Symptoms() {
 
   const [symptoms, setSymptoms] = useState([]);
 
-  useInitialData(setSymptoms, () => getData("/symptoms/get-all"));
+  const getSymptoms = useCallback(() => getData("/symptoms/get-all"), []);
+
+  useInitialData(setSymptoms, getSymptoms);
 
   return (
     <CustomTable

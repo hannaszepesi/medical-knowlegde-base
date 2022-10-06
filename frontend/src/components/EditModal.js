@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import { getData, handleDelete, useInitialData } from "./Util";
 import { sendDataForServer } from "./Util";
 import { modalStyle } from "./Style";
+import {useCallback} from "react";
 
 export default function EditModal(props) {
   const { method, name, row } = props;
@@ -64,9 +65,13 @@ export default function EditModal(props) {
     }
   };
 
-  useInitialData(setSymptomsList, () => getData("/symptoms/get-all"));
+  const getAllSymptoms = useCallback(() => getData("/symptoms/get-all"), []);
 
-  useInitialData(setRiskFactorsList, () => getData("/risk-factors/get-all"));
+  useInitialData(setSymptomsList, getAllSymptoms);
+
+  const getAllRiskFactors = useCallback(() => getData("/risk-factors/get-all"), []);
+
+  useInitialData(setRiskFactorsList, getAllRiskFactors);
 
   const getDataFromInput = (sampleObject, newValue) => {
     let newArray = [];

@@ -21,9 +21,9 @@ const headCells = [
 export default function DiseaseTable() {
   const [diseases, setDiseases] = useState([]);
 
-  const fetchMethod = useCallback(() => getData("/diseases/get-all"), []);
+  const getDiseases = useCallback(() => getData("/diseases/get-all"), []);
 
-  useInitialData(setDiseases, fetchMethod);
+  useInitialData(setDiseases, getDiseases);
 
   return (
     <CustomTable

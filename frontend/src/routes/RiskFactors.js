@@ -1,6 +1,6 @@
 import * as React from "react";
 import CustomTable from "../components/CustomTable";
-import { useState } from "react";
+import {useCallback, useState} from "react";
 import { getData, useInitialData } from "../components/Util";
 
 export default function RiskFactors() {
@@ -17,7 +17,9 @@ export default function RiskFactors() {
 
   const [riskFactors, setRiskFactors] = useState([]);
 
-  useInitialData(setRiskFactors, () => getData("/risk-factors/get-all"));
+  const getRiskFactors = useCallback(() => getData("/risk-factors/get-all"), []);
+
+  useInitialData(setRiskFactors, getRiskFactors);
 
   return (
     <CustomTable
